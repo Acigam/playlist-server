@@ -1,9 +1,4 @@
-const { Playlist } = require("../models/playlistModel");
-
-const incrementPlayCount = (id) => {
-  let song = Playlist.find((song) => {
-    return song.id == id;
-  });
+const incrementPlayCount = (song) => {
   song.playCount++;
 };
 

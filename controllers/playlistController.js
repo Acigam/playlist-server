@@ -27,7 +27,7 @@ app.get("/:id", (req, res) => {
     });
 
     if (song) {
-      incrementPlayCount(id);
+      incrementPlayCount(song);
       res.status(200).json({ message: `Now playing ${song.title}` });
     } else {
       res.status(404).json({ message: "Song not found" });
@@ -43,10 +43,13 @@ app.get("/", (req, res) => {
     let [sortKey, sortDirection] = sort ? sort.split(":") : [null, null];
 
     if (sortKey) {
-      if (!["title", "artists", "url", "playCount"].includes(sortKey)) {
+      if (!Object.keys(Playlist[0]).includes(sortKey)) {
         throw new Error("Invalid sort key");
       }
-      sortDirection = sortDirection ? sortDirection : "desc";
+      sortDirection = sortDirection ?? "desc";
+      if (!["asc", "desc"].includes(sortDirection)) {
+        throw new Error("Invalid sort direction");
+      }
       res.status(200).json({ songs: sortPlaylist(sortKey, sortDirection) });
     } else {
       res.status(200).json({ songs: Playlist });
