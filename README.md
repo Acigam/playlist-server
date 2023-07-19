@@ -1,5 +1,7 @@
 # playlist-server
 
+Song model: `id`, `title`, `artists`, `url`, `playCount`.
+
 | HTTP Verbs | Endpoints                | Action                                |
 | ---------- | ------------------------ | ------------------------------------- |
 | GET        | /api/songs               | Get all songs                         |
